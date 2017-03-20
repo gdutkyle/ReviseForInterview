@@ -4,7 +4,7 @@ Activity的生命周期如下所示，众所周知，下面主要是解决一个
 所以，我们在由A跳转到B界面时，如果有耗时操作，建议把这个操作写着A界面的onStop中，避免影响到页面的正常跳转  
 下面是Activity的生命周期流程图  
 
-![image](http://note.youdao.com/yws/public/resource/4639390ad9c72aa92fb733a49e7eee47/xmlnote/88448E9B677E4BC28B4F8C830997E0AA/303)
+![image](https://github.com/gdutkyle/ReviseForInterview/blob/master/picture/activity_life_image.png)
 ## 关于Activity销毁重现的机制
 关于onRestoreInstanceState方法和onSaveInstanceState方法
 系统只会在Activity即将被销毁并且有机会重新显示的情况下才会去调用onSaveInstanceState方法，也就是说，如果当前的activity是正常销毁的情况下，onSaveInstanceState方法并不会去调用，因为Activity不可能再次被显示。简单总结，就是系统只会在Activity异常终止的情况下，才会调用onSaveInstanceState和onRestoreInstanceState来存储和恢复数据，其他情况不会触发这个过程
