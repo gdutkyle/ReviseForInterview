@@ -1,0 +1,27 @@
+# 流程图
+Activity的生命周期如下所示，众所周知，下面主要是解决一个在开发中常常遇到的问题，在由A界面跳转到B界面时，Activity的生命周期是这样的  
+**onPause-onCreate-onStart=onResume-onStop**
+所以，我们在由A跳转到B界面时，如果有耗时操作，建议把这个操作写着A界面的onStop中，避免影响到页面的正常跳转  
+下面是Activity的生命周期流程图  
+
+![image](http://note.youdao.com/yws/public/resource/4639390ad9c72aa92fb733a49e7eee47/xmlnote/88448E9B677E4BC28B4F8C830997E0AA/303)
+## 关于Activity销毁重现的机制
+关于onRestoreInstanceState方法和onSaveInstanceState方法
+系统只会在Activity即将被销毁并且有机会重新显示的情况下才会去调用onSaveInstanceState方法，也就是说，如果当前的activity是正常销毁的情况下，onSaveInstanceState方法并不会去调用，因为Activity不可能再次被显示。简单总结，就是系统只会在Activity异常终止的情况下，才会调用onSaveInstanceState和onRestoreInstanceState来存储和恢复数据，其他情况不会触发这个过程
+
+## Activity启动模式
+**standard：**  
+每次启动一个Activity都会重新创建一个新的实例，并且把这个实例放在当前的task上。
+用ApplicationContext去启动standard模式的Activity时会报错，因为standard模式的Activity会默认进入启动它的Activity的任务栈中，由于非Activity的Context并没有对应的任务栈，所以就出问题了。解决方法：在启动Activity的时候，使用FLAG_AVTIVITY_NEW_TASK标记位，这个时候启动的Activity是以singleTask模式启动的  
+
+**singleTop** 
+
+每一次启动的时候，判断启动该Activity的Activity任务栈顶有没有对应的Activity，如果有，那么不会创建一个新的Activity，这个时候该Activity的onNewIntent方法会被回调。这个时候oncreate和onStart方法均不会被回调。如果站定没有这个Activity的实例，那么新的Activity会被重建  
+**singleTask** 
+
+如果启动的Activity不在任意一个栈内，那么系统会新开启一个任务栈并把目标Activity放入栈中，如果目标Activity已经在栈中，那么会把改Activity上的所有其他Activity清空，并调用onNewIntent方法。 
+
+**singleInstance：**
+
+加强版的singleTask。这种模式的Activity只能单独位于一个任务栈中，也就是说，如果ActivityA是singleInstance模式，那么当A启动后，系统会为A单独创建一个任务栈，然后因为栈的复用原理，后续的请求均不会创建新的任务栈了，除非它已经被销毁。
+每一个Activity都有一个标识，叫做taskAffinity，主要和singleTask一起使用。
