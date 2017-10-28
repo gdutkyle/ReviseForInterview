@@ -7,11 +7,11 @@
 （1）`public boolean dispatchTouchEvent(MotionEvent ev)`   
 如果事件分发到当前的view，那么这个方法一定会被调用，表示当前是否会消耗这个事件  
 （2）`public boolean onInterceptTouchEvent(MotionEvent ev)`  
-在dispatchTouchEvent（）方法中被调用，表示当前view是否拦截本次事件，注意，view没有这个事件，viewgroup才有  
+在dispatchTouchEvent（）方法中被调用，表示当前view是否拦截本次事件，注意，view没有这个事件，viewGroup才有  
 （3）`public boolean onTouchEvent(MotionEvent event)`  
 在dispatchTouchEvent（）方法中被调用，用来处理点击事件
 ###二 从源码出发，开始分析  
-**step 1 Activity**  
+**Step 1 Activity中的事件分发机制**  
 由View的绘制流程我们可以知道，activity的组成大致可以分为Activity->PhoneWindow->DecorView->ViewGroup->View。所以我们首先进入Activity中，查看当前Activity的事件分发处理流程，也即是整个事件分发机制的处理入口  
 由以下代码我们开始分析  
 
@@ -241,8 +241,8 @@ superDispatchTouchEvent（）方法是一个抽象方法，我们知道，继承
         }
         return handled;
     }  
-备注：以上代码已经去除了部分简单易用理解或者跟本文无关的代码  
-step 1 
+备注：以上代码已经去除了部分简单易用理解或者跟本文无关的代码，代码太长，建议在android Studio中阅读  
+**Step （1）** 
 
             final boolean intercepted;
             if (actionMasked == MotionEvent.ACTION_DOWN
@@ -300,7 +300,8 @@ step 1
         }
     }
 可以看到，如果我们的ViewGroup的子View调用这个方法，设置disallowIntercept==true，那么我们的Viewgroup也不会去调用onInterceptTouchEvent(ev)方法  
-Step 2 ViewGroup不拦截当前时间，将会把事件分发给对应的子View  
+ 
+**Step （2） 如果ViewGroup不拦截当前事件，将会把事件分发给对应的子View**  
 
     final View[] children = mChildren;
                         for (int i = childrenCount - 1; i >= 0; i--) {
@@ -371,8 +372,8 @@ Step 2 ViewGroup不拦截当前时间，将会把事件分发给对应的子View
                     }
 
 也即是，  
-1如果这个view当前在播放动画，  
-2或者这个触摸点坐标刚好坐落在子View的范围内
+1 如果这个view当前在播放动画，  
+2 或者这个触摸点坐标刚好坐落在子View的范围内
 都是符合条件的
 到最后，我们来查看接下来的执行
 
@@ -397,4 +398,187 @@ Step 2 ViewGroup不拦截当前时间，将会把事件分发给对应的子View
         return handled;
     }`
 
-也即是到了View的dispatchTouchEvent（）方法中了
+也即是到了View的dispatchTouchEvent（）方法中了  
+
+**Step 3 Vew中的事件分发机制**  
+
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        
+        boolean result = false;
+
+        if (onFilterTouchEventForSecurity(event)) {
+            if ((mViewFlags & ENABLED_MASK) == ENABLED && handleScrollBarDragging(event)) {
+                result = true;
+            }
+           
+            ListenerInfo li = mListenerInfo;
+            if (li != null && li.mOnTouchListener != null
+                    && (mViewFlags & ENABLED_MASK) == ENABLED
+                    && li.mOnTouchListener.onTouch(this, event)) {
+                result = true;
+            }
+
+            if (!result && onTouchEvent(event)) {
+                result = true;
+            }
+        }
+
+        return result;
+    }  
+以上代码忽略了跟本文无关，或者易于理解的部分，只留下核心代码  
+1 首先，由代码可以看看出，顶层View的事件分发机制中，并没有onInterceptTouchEvent(ev)方法，其实也可以很容易理解，最顶层View的意思就是说没有子view了，也就是没有进一步拦截的必要了。  
+2 顶层View会去判断当前view是不是设置了touchListener，如果当前view监听了touchlistener，那么，result=false，也即是，onTouchEvent()方法不会被调用，所以可以看出，touchListener监听的优先级要高于onTouchEvent方法  
+最后，我们来分析onTouchEvent（）方法  
+
+    public boolean onTouchEvent(MotionEvent event) {
+        final float x = event.getX();
+        final float y = event.getY();
+        final int viewFlags = mViewFlags;
+        final int action = event.getAction();
+      
+        if (((viewFlags & CLICKABLE) == CLICKABLE ||
+                (viewFlags & LONG_CLICKABLE) == LONG_CLICKABLE) ||
+                (viewFlags & CONTEXT_CLICKABLE) == CONTEXT_CLICKABLE) {
+            switch (action) {
+                case MotionEvent.ACTION_UP:
+                    boolean prepressed = (mPrivateFlags & PFLAG_PREPRESSED) != 0;
+                    if ((mPrivateFlags & PFLAG_PRESSED) != 0 || prepressed) {
+                        // take focus if we don't have it already and we should in
+                        // touch mode.
+                        boolean focusTaken = false;
+                        if (isFocusable() && isFocusableInTouchMode() && !isFocused()) {
+                            focusTaken = requestFocus();
+                        }
+
+                        if (prepressed) {
+                            // The button is being released before we actually
+                            // showed it as pressed.  Make it show the pressed
+                            // state now (before scheduling the click) to ensure
+                            // the user sees it.
+                            setPressed(true, x, y);
+                       }
+
+                        if (!mHasPerformedLongPress && !mIgnoreNextUpEvent) {
+                            // This is a tap, so remove the longpress check
+                            removeLongPressCallback();
+
+                            // Only perform take click actions if we were in the pressed state
+                            if (!focusTaken) {
+                                // Use a Runnable and post this rather than calling
+                                // performClick directly. This lets other visual state
+                                // of the view update before click actions start.
+                                if (mPerformClick == null) {
+                                    mPerformClick = new PerformClick();
+                                }
+                                if (!post(mPerformClick)) {
+                                    performClick();
+                                }
+                            }
+                        }
+
+                        if (mUnsetPressedState == null) {
+                            mUnsetPressedState = new UnsetPressedState();
+                        }
+
+                        if (prepressed) {
+                            postDelayed(mUnsetPressedState,
+                                    ViewConfiguration.getPressedStateDuration());
+                        } else if (!post(mUnsetPressedState)) {
+                            // If the post failed, unpress right now
+                            mUnsetPressedState.run();
+                        }
+
+                        removeTapCallback();
+                    }
+                    mIgnoreNextUpEvent = false;
+                    break;
+
+                case MotionEvent.ACTION_DOWN:
+                    mHasPerformedLongPress = false;
+
+                    if (performButtonActionOnTouchDown(event)) {
+                        break;
+                    }
+
+                    // Walk up the hierarchy to determine if we're inside a scrolling container.
+                    boolean isInScrollingContainer = isInScrollingContainer();
+
+                    // For views inside a scrolling container, delay the pressed feedback for
+                    // a short period in case this is a scroll.
+                    if (isInScrollingContainer) {
+                        mPrivateFlags |= PFLAG_PREPRESSED;
+                        if (mPendingCheckForTap == null) {
+                            mPendingCheckForTap = new CheckForTap();
+                        }
+                        mPendingCheckForTap.x = event.getX();
+                        mPendingCheckForTap.y = event.getY();
+                        postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());
+                    } else {
+                        // Not inside a scrolling container, so show the feedback right away
+                        setPressed(true, x, y);
+                        checkForLongClick(0, x, y);
+                    }
+                    break;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+ok，onTouchEvent方法源码大概就是这样的，那么，我们可以看到，  
+1 当View设置了**CLICKABLE** 时候，表示当前View就会消耗这个点击事件，当事件处于MotionEvent.ACTION_UP的时候，view会触发performClick方法  
+  
+     public boolean performClick() {
+        final boolean result;
+        final ListenerInfo li = mListenerInfo;
+        if (li != null && li.mOnClickListener != null) {
+            playSoundEffect(SoundEffectConstants.CLICK);
+            li.mOnClickListener.onClick(this);
+            result = true;
+        } else {
+            result = false;
+        }
+
+        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
+        return result;
+    }
+好了，也就是说，我们平时的setOnClickListener，最后就跑到这里来了~~  
+2 当View设置了**LONG_CLICKABLE** 时候  
+
+     case MotionEvent.ACTION_DOWN: 
+                        setPressed(true, x, y);
+                        checkForLongClick(0, x, y);
+                    break;
+如果当view设置了longClickListener的时候，事件的触发机制并不在ACTION_UP触发，而是在ACTION_DOWN的时候，有个判断是否checkForLongClick的方法  
+
+    private void checkForLongClick(int delayOffset, float x, float y) {
+        if ((mViewFlags & LONG_CLICKABLE) == LONG_CLICKABLE) {
+            mHasPerformedLongPress = false;
+
+            if (mPendingCheckForLongPress == null) {
+                mPendingCheckForLongPress = new CheckForLongPress();
+            }
+            mPendingCheckForLongPress.setAnchor(x, y);
+            mPendingCheckForLongPress.rememberWindowAttachCount();
+            postDelayed(mPendingCheckForLongPress,
+                    ViewConfiguration.getLongPressTimeout() - delayOffset);
+        }
+    }   
+
+
+    public boolean postDelayed(Runnable action, long delayMillis) {
+        final AttachInfo attachInfo = mAttachInfo;
+        if (attachInfo != null) {
+            return attachInfo.mHandler.postDelayed(action, delayMillis);
+        }
+
+        // Postpone the runnable until we know on which thread it needs to run.
+        // Assume that the runnable will be successfully placed after attach.
+        getRunQueue().postDelayed(action, delayMillis);
+        return true;
+    }
+也即是说，系统判断当前是否符合长按的条件，就是在按下的时候，开始一个事件，然后去监听按下的事件，如果时间符合，那就是符合长按事件了  
+
+自此，View的事件分发机制分析完毕，从源码角度出发，确实比网上的一大堆片段的代码分析要容易记得多，所以还是建议大家多多读下源码，这对我们了解一些基本原理，还是十分有帮助  
+本文有一些解释和介绍思路参照了**《安卓开发艺术探索》**这本书，在此十分感谢此书的作者。
