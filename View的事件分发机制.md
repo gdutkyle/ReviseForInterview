@@ -1,6 +1,7 @@
-#从源码分析androidView事件分发机制  
+#从源码分析androidView事件分发机制   
 
-###一 Android View事件分发机制简析
+###一 Android View事件分发机制简析  
+
 **1 事件分发的本质是什么?**  
 简单的来说，就是当一个事件到来的时候，系统为我们分配究竟是哪一个view或者viewGroup来消费这个touch事件  
 **2 事件分发机制的重要控制方法**  
