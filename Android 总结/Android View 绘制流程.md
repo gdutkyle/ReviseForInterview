@@ -84,6 +84,7 @@ ViewRootImp->PerformTrasvel()->PerformMeasure()->measure()->onMeasure()
 ->performLayout()->onLayout()  
 ->performDraw()->draw()->dispatchDraw()->onDraw()  
 #三 View的measure流程 #
+
 ###1 View的measure(int widthMeasureSpec, int heightMeasureSpec)  
 我们通过看注释，知道了measure的作用是，计算这个view应该是多大，因为父布局提供了传入制定的宽高参数。具体的测量工作其实是放在onMeasure（int，int）方法中去执行的，onMeasure（int，int）方法能够也必须被继承（当我们重写view）的时候。  
 好了，那么问题来了，什么是widthMeasureSpec 和heighMeasureSpec？
@@ -118,7 +119,8 @@ ViewRootImp->PerformTrasvel()->PerformMeasure()->measure()->onMeasure()
 SepcMode一共有三类，除了我们上面看到的MeasureSpec.EXACTLY外，还有MeasureSpec.UNSPECIFIED和MeasureSpec.AT_MOST  
 **MeasureSpec.UNSPECIFIED：** 父布局没有指定任何的约束大小，子布局想多大就多大；  
 **MeasureSpec.EXACTLY：** 父布局已经指定了一个确切的大小，子布局的大小就是SpecMode的大小；  
-**MeasureSpec.AT_MOST：** 子布局可以想多大就多大，但是不能超过SpecSize的值
+**MeasureSpec.AT_MOST：** 子布局可以想多大就多大，但是不能超过SpecSize的值  
+
 ###2 View的onMeasure(int widthMeasureSpec, int heightMeasureSpec)
      protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
@@ -152,7 +154,9 @@ SepcMode一共有三类，除了我们上面看到的MeasureSpec.EXACTLY外，�
         return result;
     }
 这段代码也很简单，首先view会去获取父view传进来的measureSpec，获取specSize和specMode两个值。当当前的specMode是MeasureSpec.UNSPECIFIED，则返回我们上一点分析的，minimumWidth的长度，如果是 MeasureSpec.AT_MOST和MeasureSpec.EXACTLY，那么其实就是specSize的大小。  
+
 ###3 ViewGroup的measure流程###
+
 ViewGroup其实没有onMeasure（）方法，ViewGroup的measure流程，最后就是走的measureChildren(int,int)方法中，我们接下来看这个方法  
 
      protected void measureChildren(int widthMeasureSpec, int heightMeasureSpec) {
@@ -227,8 +231,10 @@ view的layout流程，简单概括，就是，指定一个view的位置和它的
         }
     }
 
-整个layout的流程就是，通过setOpticalFrame或者setFrame方法，穿进去l，t，r，b，这样我们的view的位置就可以确定了。接下来就回调onLayout（）方法，由子view去决定当前的layout要怎么控制。
-#三 View的draw流程 #
+整个layout的流程就是，通过setOpticalFrame或者setFrame方法，穿进去l，t，r，b，这样我们的view的位置就可以确定了。接下来就回调onLayout（）方法，由子view去决定当前的layout要怎么控制。  
+
+#三 View的draw流程 #  
+
 draw流程比较简单，这里不大篇幅的上代码，根据注释，我们可以得到view的draw流程主要是有5步：   
 1 画背景  
 2 如果有需要的话，保存当前画布  
