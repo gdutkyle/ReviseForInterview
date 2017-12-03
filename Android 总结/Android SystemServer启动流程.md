@@ -1,8 +1,10 @@
 #Android SystemServer 启动流程  
 
-###什么是SystemServer？  
+### 一 什么是SystemServer？  
 简单来说，systemServer就是系统用来启动各种service的入口，安卓系统在启动的时候，会初始化两个重要的部分，一个是zygote进程，另一个是由zygote进程fork出来的SystemServer进程，SystemServer会启动我们系统中所需要的一系列service，下面会做分析。
-###从源码出发，分析Systemserver  
+### 二 从源码出发，分析Systemserver  
+**2.1 SystemServer调用的入口**  
+
     public static void main(String[] args) {
         new SystemServer().run();
     }
@@ -153,10 +155,11 @@ systemManagerService的作用是用来管理service的创建、开始或者Syste
 **Step 1 分析startBootstrapService()方法**  
 
     private void startBootstrapServices() {
-        // Wait for installd to finish starting up so that it has a chance to
-        // create critical directories such as /data/user with the appropriate
-        // permissions.  We need this to complete before we initialize other services.
         Installer installer = mSystemServiceManager.startService(Installer.class);
+
+        traceBeginAndSlog("DeviceIdentifiersPolicyService");
+        mSystemServiceManager.startService(DeviceIdentifiersPolicyService.class);
+        traceEnd();
 
         // Activity manager runs the show.
         mActivityManagerService = mSystemServiceManager.startService(
@@ -235,4 +238,114 @@ systemManagerService的作用是用来管理service的创建、开始或者Syste
         // The sensor service needs access to package manager service, app ops
         // service, and permissions service, therefore we start it after them.
         startSensorService();
+    }  
+在这段代码中，我们先分析核心的代码：  
+
+        traceBeginAndSlog("StartInstaller");
+        Installer installer = mSystemServiceManager.startService(Installer.class);
+        traceEnd();
+
+        // In some cases after launching an app we need to access device identifiers,
+        // therefore register the device identifier policy before the activity manager.
+        traceBeginAndSlog("DeviceIdentifiersPolicyService");
+        mSystemServiceManager.startService(DeviceIdentifiersPolicyService.class);
+        traceEnd();
+这段代码的执行，就是为了先启动installer，这样android才有机会去创建一些关键的路径（data/user）,这些都需要在其他Service启动前完成。其次，通过`mSystemServiceManager.startService(DeviceIdentifiersPolicyService.class);`这段代码，android需要注册当前的设备表示，以防有一些特殊的时候需要用到。  
+我们进入install类的onStart()方法一看  
+
+    @Override
+    public void onStart() {
+        if (mIsolated) {
+            mInstalld = null;
+        } else {
+            connect();
+        }
+    }  
+    private void connect() {
+        IBinder binder = ServiceManager.getService("installd");
+        if (binder != null) {
+            try {
+                binder.linkToDeath(new DeathRecipient() {
+                    @Override
+                    public void binderDied() {
+                        Slog.w(TAG, "installd died; reconnecting");
+                        connect();
+                    }
+                }, 0);
+            } catch (RemoteException e) {
+                binder = null;
+            }
+        }
+
+        if (binder != null) {
+            mInstalld = IInstalld.Stub.asInterface(binder);
+            try {
+                invalidateMounts();
+            } catch (InstallerException ignored) {
+            }
+        } else {
+            Slog.w(TAG, "installd not found; trying again");
+            BackgroundThread.getHandler().postDelayed(() -> {
+                connect();
+            }, DateUtils.SECOND_IN_MILLIS);
+        }
     }
+我们可以看到，其实这就是一个递归。install通过调用connect，去判断installer是否被初始化。只有installer被初始化了，才会继续往下掉用，初始化其他的服务。  
+接下来，启动ActivityManagerService。我们通过代码分析：  
+
+        mActivityManagerService = mSystemServiceManager.startService(
+                ActivityManagerService.Lifecycle.class).getService();
+        mActivityManagerService.setSystemServiceManager(mSystemServiceManager);
+        mActivityManagerService.setInstaller(installer);
+我们开启ams传入的是 ActivityManagerService.Lifecycle.class，同时把installer传入给ams。我们进入AMS查看代码，可以看到  
+
+    final void finishBooting() {
+        ...
+        for (String abi : Build.SUPPORTED_ABIS) {
+            zygoteProcess.establishZygoteConnectionForAbi(abi);
+            final String instructionSet = VMRuntime.getInstructionSet(abi);
+            if (!completedIsas.contains(instructionSet)) {
+                try {
+                    mInstaller.markBootComplete(VMRuntime.getInstructionSet(abi));
+                } catch (InstallerException e) {
+                    Slog.w(TAG, "Unable to mark boot complete for abi: " + abi + " (" +
+                            e.getMessage() +")");
+                }
+                completedIsas.add(instructionSet);
+            }
+        }
+      ...
+     }
+所以finishBooting是ams和zygote进行通讯的入口。  
+startBootstrapServices()方法中，还启动了很多其他的services，包括PowerManagerService、RecoverySystemService、LightsService、DisplayManagerService等等，这里就不重复做出分析了。  
+
+**Step 2 分析startCoreServices()方法**  
+
+    private void startCoreServices() {
+        // Records errors and logs, for example wtf()
+        traceBeginAndSlog("StartDropBoxManager");
+        mSystemServiceManager.startService(DropBoxManagerService.class);
+        traceEnd();
+
+        traceBeginAndSlog("StartBatteryService");
+        // Tracks the battery level.  Requires LightService.
+        mSystemServiceManager.startService(BatteryService.class);
+        traceEnd();
+
+        // Tracks application usage stats.
+        traceBeginAndSlog("StartUsageService");
+        mSystemServiceManager.startService(UsageStatsService.class);
+        mActivityManagerService.setUsageStatsManager(
+                LocalServices.getService(UsageStatsManagerInternal.class));
+        traceEnd();
+
+        // Tracks whether the updatable WebView is in a ready state and watches for update installs.
+        traceBeginAndSlog("StartWebViewUpdateService");
+        mWebViewUpdateService = mSystemServiceManager.startService(WebViewUpdateService.class);
+        traceEnd();
+    }  
+这个方法主要启动一些跟bootstrap进程无关的service，这里比较好玩的是，android会在这里去检测WebView是处于就绪状态和手动更新安装。  
+**Step 3 分析startOtherServices()方法**  
+这个方法过长，就不贴上源码的，这个方法主要是为了整理或者重构一些杂七杂八的包，不太重要，不做分析。
+### 总结
+至此，systemServer启动流程分析完毕，可能篇幅太长，大家需要自己好好整理，没事多复习
