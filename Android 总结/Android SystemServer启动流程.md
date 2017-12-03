@@ -348,4 +348,21 @@ startBootstrapServices()方法中，还启动了很多其他的services，包括
 **Step 3 分析startOtherServices()方法**  
 这个方法过长，就不贴上源码的，这个方法主要是为了整理或者重构一些杂七杂八的包，不太重要，不做分析。
 ### 总结
-至此，systemServer启动流程分析完毕，可能篇幅太长，大家需要自己好好整理，没事多复习
+至此，systemServer启动流程分析完毕，可能篇幅太长，大家需要自己好好整理，没事多复习。  
+
+（1）SystemServer进程是android中一个很重要的进程由Zygote进程启动；
+
+（2）SystemServer进程主要用于启动系统中的服务；  
+
+（3）SystemServer进程启动服务的启动函数为main函数；  
+
+（4）SystemServer在执行过程中首先会初始化一些系统变量，加载类库，创建Context对象，创建SystemServiceManager对象等之后才开始启动系统服务；
+
+（5）SystemServer进程将系统服务分为三类：boot服务，core服务和other服务，并逐步启动
+
+（6）SertemServer进程在尝试启动服务之前会首先尝试与Zygote建立socket通讯，只有通讯成功之后才会开始尝试启动服务；
+
+（7）创建的系统服务过程中主要通过SystemServiceManager对象来管理，通过调用服务对象的构造方法和onStart方法初始化服务的相关变量；
+
+（8）服务对象都有自己的异步消息对象，并运行在单独的线程中；  
+（备注）以上8点的总结，参考的是[http://blog.csdn.net/qq_23547831/article/details/51105171](http://blog.csdn.net/qq_23547831/article/details/51105171)  在此感谢作者
