@@ -1,4 +1,4 @@
-#Android SystemServer 启动流程  
+# Android SystemServer 启动流程  
 
 ### 一 什么是SystemServer？  
 简单来说，systemServer就是系统用来启动各种service的入口，安卓系统在启动的时候，会初始化两个重要的部分，一个是zygote进程，另一个是由zygote进程fork出来的SystemServer进程，SystemServer会启动我们系统中所需要的一系列service，下面会做分析。
