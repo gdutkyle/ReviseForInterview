@@ -1,5 +1,5 @@
-##Android handler机制  
-###一 什么是Android Handler 机制？
+## Android handler机制  
+### 一 什么是Android Handler 机制？
 很多的博客书籍，在介绍Android handler机制的时候，更多的是解释为，Android提供的，子线程用于和UI线程通讯，用于更新主线程UI。但是这种异步处理回调机制，是否仅仅只是用于线程间的通讯？我们能不能用这种回调思想，用于我们的业务中？是我们一个值得去思考的地方。
 ###二 Handler机制中几个重要的组成部分  
 **1 Looper**  
@@ -38,10 +38,10 @@ enqueueMessage中首先为message.target赋值为this，也就是把当前的han
 Handler的作用就是将message对象压入messageQueue中，然后通过looper不停的从消息队列中取出message，并作出对应的处理。因此，Handler有两个主要的功能，分别是：
 1 定时执行messages 和 runnables；
 2 在将一个action入队并在其他线程中执行；  
-###三 总结  
+### 三 总结  
 简单来说，Android handler机制就是在子线程中，handler把一个消息对象压入消息队列中，然后，在handler对应的线程中，通过looper循环队列，取出对应的message并作出相对应的处理，完成了两个线程间的通讯。 
 
-###四 引申  
+### 四 引申  
 
 前文说到，Android Handler机制我们可以按照这种思想来实现什么业务呢？  
 1 即时通讯的消息处理。我们可以在发消息的时候，把一个消息体放到消息队列中，然后在后台中开启一个循环去遍历这个消息队列，然后调用发送消息接口把这个消息发送出去，这样，我们就可以在不堵塞主线程的情况下，完成消息的发送处理。  
