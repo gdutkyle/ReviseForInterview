@@ -3,7 +3,7 @@
 ## 一 什么是HashMap？  
 HashMap 继承了AbstractMap,实现了Map接口，HashMap是根据key-value来存储数据的，HashMap其实就是一个数组+链表+红黑树组成的。因为HashMap在存储数据的时候，会先去计算key的hash值，因为一个相同的key值，所得的hash值应该是唯一的，所以我们可以很快的去定位到value的值。HashMap允许key和value都为null，但是key只能有一次为空，为什么呢？我们在下文中会进行分析。HashMap是非线程安全的，所以非常不建议在多线程中去操作hashMap，以为这样会导致数据不统一。如果一定要用到类似结构，可以使用SynchronizedMap。
 
-##二 从源码入手，开始出发。
+## 二 从源码入手，开始出发。
 ### **Step 1：HashMap 的基本数据单元 Node**   
 
     /**
@@ -308,7 +308,7 @@ remove方法还是比较简单明了的，首先，在我们的hashMap不为空�
 **3 get(Object key)方法**  
 get方法其实和remove的流程其实差不多，这里不再进行分析，有需要的朋友可以自己去查看源码。  
 
-##三 总结  
+## 三 总结  
 自此，HashMap的源码分析到此结束了，我们需要特别注意一下几点：  
 1 hashMap是线程不安全的，如果需要在多线程下执行同一个hashMap,ConcurrentHashMap();  
 2 JAVA 8 在处理Hash冲突的时候，引用了红黑树。我们知道，红黑树的插入动作虽然很麻烦，但是他的时间复杂度其实可以控制在n（Log n）上，所以，性能会十分的客观。而且，老的使用数据扩容的方法，当数据量大的时候，会时时间性能呈现指数增长的过程  
