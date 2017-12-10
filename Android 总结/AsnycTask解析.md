@@ -1,5 +1,5 @@
-#Android AsyncTask 解析  
-###一 什么是AsnycTask  
+# Android AsyncTask 解析  
+### 一 什么是AsnycTask  
 <p>AsyncTask enables proper and easy use of the UI thread. This class allows you to perform background operations and publish results on the UI thread without having to manipulate threads and/or handlers.</p>  
 
 这句话的意思是，我们在UI线程可以很简单、适用的调用AsyncTask。这个方法可以使我们不用调用Thread+handler的方式，就可以轻松的在后台线程做操作，然后把结果回调给UI线程  
@@ -12,7 +12,7 @@
 
 同时，google也声明了，AsyncTask设计的初衷就是一个用来连接Threa和Handler的帮助类，而不是用于设计一个通用的线程框架，同时，AsnycTask应该用于那些后台操作在极短，最长时间不超过几秒的操作，如果我们需要在后台进行长时间的操作，更推荐使用{@link Executor},{@link ThreadPoolExecutor} and {@link FutureTask}（也即是自定义线程池）去定义自己的后台行为  
 
-###二 几个重要方法和变量  
+### 二 几个重要方法和变量  
 
     public final AsyncTask<Params, Progress, Result> execute(Params... params) {
         return executeOnExecutor(sDefaultExecutor, params);
