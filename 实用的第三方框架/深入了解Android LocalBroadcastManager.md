@@ -11,7 +11,7 @@ LocalBroadcastManager 主要在你的进程中，用来注册和发送一个Inte
 
 **2 高效性：**localbroadcastmanager比全局的广播更加的高效   
 ## 三 LocalBroadcastManager的使用  
-###第一步：自定义BroadcastReceiver  
+### 第一步：自定义BroadcastReceiver  
 
       public static class MyBroadCardReveiver extends BroadcastReceiver {
 
@@ -23,14 +23,14 @@ LocalBroadcastManager 主要在你的进程中，用来注册和发送一个Inte
             }
         }
     }
-###第二步：注册Receiver  
+### 第二步：注册Receiver  
 
     IntentFilter intentFilter = new IntentFilter();
     intentFilter.addAction(INTENT_FILTER_REFRESH_UI);
     LocalBroadcastManager.getInstance(this).registerReceiver(myBroadCardReveiver, intentFilter);  
 
 LocalBroadcastManager 的注册需要传入自定义的**BroadcastReceiver** 和 **IntentFilter**。IntentFilter主要用来注册当前需要监听的action是什么。这个我们后面再讲  
-###第三步：在取消监听Receiver：unregisterReceiver(myBroadCardReveiver)  
+### 第三步：在取消监听Receiver：unregisterReceiver(myBroadCardReveiver)  
 LocalBroadcastManager 的注册和监听一般是成对存在的。如果我们在Activity的onCreate()方法中注册监听Broadcast，那么我们就需要在onDestory()中进行反注册。如果我们不unregister，将会带来内存泄漏的问题 
  
     @Override
@@ -38,14 +38,14 @@ LocalBroadcastManager 的注册和监听一般是成对存在的。如果我们�
         LocalBroadcastManager.getInstance(this).unregisterReceiver(myBroadCardReveiver);
         super.onDestroy();
     }  
-###第四步：发送localBroadcast  
+### 第四步：发送localBroadcast  
 
      Intent intent=new Intent();
      intent.setAction(INTENT_FILTER_REFRESH_UI);
      LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);  
 好了至此为止，我们已经知道了如何在我们的项目中使用localbroadcastmanager。接下来我们将进行源码的剖析  
 ## 四 源码剖析  
-###4.1 localBroadcastmanager的初始化  
+### 4.1 localBroadcastmanager的初始化  
 
     public static LocalBroadcastManager getInstance(Context context) {
         synchronized (mLock) {
@@ -73,7 +73,7 @@ LocalBroadcastManager 的注册和监听一般是成对存在的。如果我们�
         };
     }
 好吧，LocalBroadcastManager其实是一个**单例设计**，根据后面的初始化我们知道，其实我们在外面传入的context，到了localbroadcastmanager内部，用的是当前context所在的应用的上下文。这样是因为不造成内存泄漏，LocalBroadcastManager只持有当前app的上下文。同时我们看到，LocalBroadcastManager 在初始化的时候，还初始化了一个handler，这个handler是把结果抛向主线程的。所以，我们可以在LocalBroadcastManager接收回调的时候，进行UI的更新操作。  
-###4.2 localbroadcastmanager的注册  
+### 4.2 localbroadcastmanager的注册  
 
     public void registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
         synchronized (mReceivers) {
@@ -96,10 +96,10 @@ LocalBroadcastManager 的注册和监听一般是成对存在的。如果我们�
         }
     }
 registerReceiver方法是为那些匹配了intentFilter的action注册的监听。  
-我们可以看到，这个方法有两个重要的变量，一个是**mReceiver**：mReceivers是一个list，它是以Receiver当做key，filters当成value保存进list中。第二个是**mActions**：mActions保存着filter中添加进去的action，也就是我们上面的代码  
+我们可以看到，这个方法有两个重要的变量，一个是**mReceiver**：mReceivers是一个hashMap，它是以Receiver当做key，filters当成value保存进hashMap中。第二个是**mActions**：mActions保存着filter中添加进去的action，也就是我们上面的代码  
 
     intentFilter.addAction(INTENT_FILTER_REFRESH_UI);  
-###4.3 localbroadcastmanager的反注册  
+### 4.3 localbroadcastmanager的反注册  
 
     public void unregisterReceiver(BroadcastReceiver receiver) {
         synchronized (mReceivers) {
@@ -130,7 +130,7 @@ registerReceiver方法是为那些匹配了intentFilter的action注册的监听�
         }
     }
 从上面代码中，我们可以看到，LocalBroadcastManager尝试从mReceiver中移除当前的监听，如果这个监听没有被注册进去，那么就直接返回，否则的话，就进一步去那mAction中被添加进去的action，把他们一个一个找到，然后移除出去。  
-###4.4 localbroadcastmanager发送广播  
+### 4.4 localbroadcastmanager发送广播  
 
     public boolean sendBroadcast(Intent intent) {
         synchronized (mReceivers) {
