@@ -5,13 +5,13 @@
 
 手机：18826408875  &nbsp; &nbsp;邮箱：992488670@qq.com  
 
-英语等级:四级 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;毕业年限：2015年   
+英语等级:四级 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;工作年限：3年   
 
 应聘岗位：Android开发工程师  
 # 工作技能
-1 熟练掌握 java 开发技术,具有较好的 java 基础，熟悉JVM 的内存回收机制，熟悉java8 HashMap源码  
+1 熟练掌握 java 开发技术,具有较好的 java 基础，熟悉JVM 的内存回收机制，熟悉java8 HashMap、ArrayList源码等  
 
-2 熟练掌握Android开发技术，熟悉android Handler机制、AsnycTask源码，Activity 加载模式、Android LruCache源码、systemServer启动流程等
+2 熟练掌握Android开发技术，熟悉android Handler机制、AsnycTask源码，Activity 加载模式、Android LruCache源码、systemServer启动流程、LocalBroadcastManager源码等
 
 3 熟悉安卓view的绘制流程、事件分发机制和布局优化，熟悉ViewStub工作原理
 
@@ -19,7 +19,9 @@
 
 5 熟悉tcp/upd,熟悉http/https工作原理。了解okHttp3工作原理和流程分析
 
-6 熟悉安卓第三方推送服务（小米推送和华为推送），华为推送方案高度结合云之家已有业务
+6 熟悉安卓第三方推送服务（小米推送和华为推送），华为推送方案高度结合云之家已有业务  
+
+7 良好的团队协作能力和沟通能力，具有一定的产品思维
  
 # 教育背景
 时间	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;学校	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;专业	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 学历
@@ -27,16 +29,18 @@
 2011-2015	&nbsp; &nbsp;广东工业大学	&nbsp; &nbsp;&nbsp; &nbsp;软件工程	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;本科
 
 # 工作经验
-**公司名称**&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;**深圳云之家网络有限公司**  
+**公司名称**&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;**深圳云之家网络有限公司** &nbsp;&nbsp;&nbsp;&nbsp;**规模**&nbsp;&nbsp;&nbsp;&nbsp;500-1000人  
 
 **工作时间**&nbsp; &nbsp;2015-7至今	&nbsp; &nbsp;&nbsp; &nbsp;**职位**	 &nbsp; &nbsp;Android开发工程师  
 
-**职责**&nbsp; &nbsp;&nbsp; &nbsp;组织服务小组开发Leader（小组成员9人）  
+**职责**&nbsp; &nbsp;&nbsp; &nbsp;项目组TeamLeader（小组成员9人）  
+
+**汇报对象**&nbsp; &nbsp;云之家副总经理  
 
 **工作内容**  
-1 组织服务小组各迭代的任务安排和技术方案设计和协调  
+1 项目组各迭代的任务安排和技术方案制定及资源协调  
 
-2 项目模块各迭代周期的开发，并作为骨干成员参与了云之家V7、V8、V9的需求评定和开发实现 
+2 项目模块各迭代周期的开发任务，设计和维护android项目底层模块和业务 
 
 3 对接云之家开放平台，为云之家开放平台提供基础服务和技术支持  
 
@@ -44,7 +48,8 @@
 
 5 优化重构代码，对现有的复杂模块进行重构和优化  
 
-6 对接客服部门，快速定位和解决客户问题
+6 对接客服部门，快速定位和解决客户问题  
+
 # 项目经验
 ### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;云之家V9视觉开发项目负责人	  
 
