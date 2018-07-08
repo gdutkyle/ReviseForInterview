@@ -15,7 +15,7 @@
 
 3 熟悉安卓view的绘制流程、事件分发机制和布局优化，熟悉ViewStub工作原理
 
-4 熟悉安卓数据库开发，熟悉安卓SharedPreferences工作原理  
+4 熟悉安卓数据库开发，具有一定的优化能力，熟悉数据库备份和恢复原理。熟悉安卓SharedPreferences工作原理  
 
 5 熟悉tcp/upd,熟悉http/https工作原理。了解okHttp3工作原理和流程分析
 
@@ -51,6 +51,22 @@
 6 对接客服部门，快速定位和解决客户问题  
 
 # 项目经验
+
+### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;数据库性能优化
+
+**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018-3月  
+
+**项目简介**  
+由于加密的需要，云之家项目使用的是SQLCipher进行整个库的加密，在微信开源了wcdb后，项目进行了数据库的底层升级，由SQLCipher升级为wcdb，并梳理工程中的大数据数据库操作，全面进行升级和优化
+
+**技术方案**  
+1 数据库底层替换成wcdb；2 梳理登录业务逻辑，首次登录由原先的insertorUpdate更换为只insert，并开启事务，进行批量插入；3 超大数据量人员同步，由update替换成insert；4 数据库批量查询，由单个查询改为批量查询
+
+**项目成果**  
+
+整体提升了数据库的写入和读取性能。其中，登录的同步时间由原来的1min/1w人优化至3s/1w人，超大的人员同步由200s/1w优化至2s/1w。同时数据库的稳定性有了极大的提升
+
+-----
 ### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;人员列表展示性能优化
 
 **时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-11月  
