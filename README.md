@@ -1,164 +1,71 @@
-# 基本信息  
+## 基本信息  
 
 
-姓名： 吴浩&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;性别：&nbsp;&nbsp;男  
-
-手机：18826408875  &nbsp; &nbsp;邮箱：992488670@qq.com  
-
-英语等级:四级 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;工作年限：3年   
-
-应聘岗位：Android开发工程师  
-# 工作技能
-1 熟练掌握 java 开发技术,具有较好的 java 基础，熟悉JVM 的内存回收机制，熟悉java8 HashMap、ArrayList源码等  
-
-2 熟练掌握Android开发技术，熟悉android Handler机制、AsnycTask源码，Activity 加载模式、Android LruCache源码、systemServer启动流程、LocalBroadcastManager源码等
-
-3 熟悉安卓view的绘制流程、事件分发机制和布局优化，熟悉ViewStub工作原理
-
-4 熟悉安卓数据库开发，具有一定的优化能力，熟悉数据库备份和恢复原理。熟悉安卓SharedPreferences工作原理  
-
-5 熟悉tcp/upd,熟悉http/https工作原理。了解okHttp3工作原理和流程分析
-
-6 熟悉安卓第三方推送服务（小米推送和华为推送），华为推送方案高度结合云之家已有业务  
-
-7 良好的团队协作能力和沟通能力，具有一定的产品思维
- 
-# 教育背景
+姓名： 吴浩&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;性别：&nbsp;&nbsp;男
+手机：18826408875  &nbsp; &nbsp;邮箱：992488670@qq.com
+英语等级:四级 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;工作年限：4年
+应聘岗位：Android开发工程师
+## 工作技能
+1 熟练掌握 java 开发技术,具有较好的 java 基础，熟悉JVM 的内存回收机制，熟悉java8 HashMap源码等。
+2 熟练掌握Android开发技术，对于基础的Android Framework 源码有一定的了解，包括但不限于Zygote、binder 机制、Activity 启动流程、View 绘制流程、LocalBroadCastManager等
+3 具有比较丰富的IM开发经验，熟悉主流IM 项目的架构和流程。了解移动端主流的长连接方案、心跳保活流程等，对腾讯的Mars有一定的研究
+4 熟悉安卓数据库开发，具有一定的优化能力，熟悉数据库备份和恢复原理。熟悉安卓SharedPreferences工作原理
+5 对于Android性能优化（内存、帧率）、架构升级、稳定性治理有多个实际项目经验
+## 教育背景
 时间	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;学校	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;专业	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 学历
 
 2011-2015	&nbsp; &nbsp;广东工业大学	&nbsp; &nbsp;&nbsp; &nbsp;软件工程	&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;本科
 
-# 工作经验
-**公司名称**&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;**深圳云之家网络有限公司** &nbsp;&nbsp;&nbsp;&nbsp;**规模**&nbsp;&nbsp;&nbsp;&nbsp;500-1000人  
+## 工作经验
+**公司名称**&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;**阿里巴巴-Lazada** &nbsp;&nbsp;&nbsp;&nbsp;
+**工作时间**&nbsp; &nbsp;2018/09 至今	&nbsp; &nbsp;&nbsp; &nbsp;**职位**	 &nbsp; &nbsp;高级无线开发工程
+**工作内容**
+1 Lazada、AliExpress（速卖通）、Daraz 等海外电商的IM 需求开发和维护
+2 负责各海外电商MessageBox的需求开发和维护 
+3 负责IMSDK&MessageBox的性能优化和架构升级
 
-**工作时间**&nbsp; &nbsp;2015-7至今	&nbsp; &nbsp;&nbsp; &nbsp;**职位**	 &nbsp; &nbsp;Android开发工程师  
 
-**职责**&nbsp; &nbsp;&nbsp; &nbsp;项目组TeamLeader（小组成员9人）  
-
-**汇报对象**&nbsp; &nbsp;云之家副总经理  
-
-**工作内容**  
-1 项目组各迭代的任务安排和技术方案制定及资源协调  
-
+**公司名称**&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;**深圳云之家网络有限公司** &nbsp;&nbsp;&nbsp;&nbsp;
+**工作时间**&nbsp; &nbsp;2015/07-2018/09	&nbsp; &nbsp;&nbsp; &nbsp;**职位**	 &nbsp; &nbsp;Android开发工程师
+**职责**&nbsp; &nbsp;&nbsp; &nbsp;项目组TeamLeader（小组成员9人）
+**工作内容**
+1 项目组各迭代的任务安排和技术方案制定及资源协调
 2 项目模块各迭代周期的开发任务，设计和维护android项目底层模块和业务 
+3 完成云之家通用基础组件的设计和开发
+4 优化重构代码，对现有的复杂模块进行重构和优化  
 
-3 对接云之家开放平台，为云之家开放平台提供基础服务和技术支持  
+## 项目经验
 
-4 完成云之家通用基础组件的设计和开发，如通用ListView 索引栏和水印布局的设计和实现  
+### 项目名称&nbsp;&nbsp;&nbsp;&nbsp; 阿里海外电商Message&IM（千万日活）
 
-5 优化重构代码，对现有的复杂模块进行重构和优化  
-
-6 对接客服部门，快速定位和解决客户问题  
-
-
-# 项目经验
-
-### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;组织人员服务项目
-
-**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015-7月至今  
-
-**项目简介**  
-组织人员服务，从业务上出发，就是为各个业务线提供基础的组织和人员信息服务，同时包含登录注册、团队、组织、人员几大模块的信息和管理、选人组件等各大模块
-
-**我的职责**  
-进行各个迭代周期的开发任务，跟进线上反馈的问题，并协助各个业务线，解决组织人员相关的技术问题和相关方案的设定  
-  
-------
-
-### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;云之家智能签到项目
-
-**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-6月至2017年9月 
-
-**项目简介**  
-智能签到项目是云之家最核心、用户活跃度最高的项目，智能签到的核心是基于手机端lbs服务，进行上下班打卡签到，摆脱传统的考勤机效率低下的局限，为企业考勤管理和任务排班提供提供灵活方便的解决方案。
-
-**我的职责**  
-进行迭代的开发，同时统一和优化定位服务，集中百度、腾讯、高德三个定位sdk的调用和切换，提高定位精准度。 
-  
-------
-### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;云之家即时通讯（IM）
-
-**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015-10月至2016年5月 
-
-**项目简介**  
-即时通讯业务是云之家核心基础业务之一，稳定高效的消息推送，智能便捷的消息群组管理功能，多样化的内容展示，让企业聊天从微信转移到云之家，从此工作和生活有了区分，让用户可以更专心和高效的处理工作中的相关事宜。
-
-**我的职责**  
-负责迭代周期的开发任务，包括群组管理、推送服务（2017年开始）、消息分页项目优化等
-  
-------
-
-# 优化与重构
-
-### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;数据库性能优化
-
-**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018-3月  
-
-**项目简介**  
-由于加密的需要，云之家项目使用的是SQLCipher进行整个库的加密，在微信开源了wcdb后，项目进行了数据库的底层升级，由SQLCipher升级为wcdb，并梳理工程中的大数据数据库操作，全面进行升级和优化
-
-**技术方案**  
-1 数据库底层替换成wcdb；2 梳理登录业务逻辑，首次登录由原先的insertorUpdate更换为只insert，并开启事务，进行批量插入；3 超大数据量人员同步，由update替换成insert；4 数据库批量查询，由单个查询改为批量查询
-
-**项目成果**  
-
-整体提升了数据库的写入和读取性能。其中，登录的同步时间由原来的1min/1w人优化至3s/1w人，超大的人员同步由200s/1w优化至2s/1w。同时数据库的稳定性有了极大的提升
-
------
-
-### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;复杂业务模块重构（人员详情和组织架构模块）
-
-**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-3月  
-
-**项目简介**  
-随着项目的快速发展，组织服务中重要的两个大模块：人员详情和组织机构因为历史原因，已经不能快速相应业务的快速迭代，增加一个列显示或者排序顺序的变化，都会让原本复杂的代码变得难以维护和增加功能，因此需要进行业务重构  
-
-**技术方案**  
-采用MVP+RecycleView+MultiType的设计架构，将各个大模块抽离出小的模块，进行解耦。以后如果需要变更，只需要调整顺序，修改provider或者新增一个provider加入展示列表即可
-
-**项目成果**  
-本次重构，将所有的业务进行拆分和组装，在功能变更的时候，可以快速相应需求，而且各个小模块相对独立，不会对以后的业务造成影响，便于验证回归 
-
------
-
-### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;通用选人组件设计和重构 
-
-**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016-7到2016-8  
-
-**项目简介**  
-云之家选人组件意在为各个业务模块提供基础选人服务，由于选人组件历经多人开发和维护，造成选人组件与业务耦合度极高，各个业务模块对选人组件的ui有不一样的要求，多个业务实现代码放在组件中，导致选人组件极易出现选人bug，不好扩展和维护。  
-
-**技术方案**  
-采用mvp的设计模式，对于人员数据展示采用策略分发的模式，基于业务端决定选人组件的样式和功能的思想，对整个选人组件进行完整重构。 
-
-**项目成果**  
-统一各个业务线组件的调用模式。选人组件的重构在业务调用和结果返回更加的简单和方便，提高了开发的效率和代码的稳定性，这个基础设计思想也被ios开发组所采用  
-
------
-
-### 项目名称&nbsp;&nbsp;&nbsp;&nbsp;云之家消息推送搭建和优化  
-
-**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-4月  
-
-**项目简介**  
-由于安卓平台的限制，云之家push的到达率不高，许多用户经常反馈杀掉进程后，聊天消息就收不到了。本次优化，针对不同的手机厂商，设计适合云之家业务的推送方案，提升消息的到达率。  
-
-**技术方案**  
-引入小米pushSdk和华为pushSdk，结合长连接websocket，在特定的场景下，不同的手机厂商，透传和非透传push方式切换，提升消息的到达率
-
-**项目成果**  
-
-新的推送方案上线后，极大的提高了消息的到达率，用户反馈消息接收不到的问题大幅度减少。
+**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018-9月至今
+**项目简介**
+现所在的Bu负责阿里海外电商的国际化业务，业务方包括AliExpress、Lazada、Daraz、台湾淘宝等阿里的战略出海业务
+**我的职责**
+主要负责业务模块：
+1 IM模块
+2 Message（消息盒子）从0-1，单项业务日活千万
 
 ------
 
-# 荣誉和奖励
-1.深圳云之家网络有限公司2017年精英人才  
 
-2.深圳云之家网络有限公司2016年年度优秀员工  
+### 项目名称&nbsp;&nbsp;&nbsp;&nbsp; 金蝶 云之家（百万日活）
 
-3.深圳云之家网络有限公司2015届部门优秀纯金   
+**时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015-7月2018-9月
+**项目简介**
+基于组织通讯录的即时消息、签到、请假、文件、公告及应用接入服务，提高工作效率。云之家是中国企业移动互联网领域的领先品牌。它通过移动办公与团队协作APP应用，帮助企业打破部门与地域限制，提升工作效率，激活组织活力。
+**我的职责**
+主要负责业务模块：
+1 组织通讯录模块开发
+2 即时通讯（IM）模块开发
+进行各个迭代周期的开发任务，跟进线上反馈的问题，并协助各个业务线，解决相关的技术问题和相关方案的设定  
 
-附:  
-github地址：https://github.com/gdutkyle  
+## 荣誉和奖励
+1 2018年阿里财年年度绩效3.75
+2.深圳云之家网络有限公司2017年精英人才
+3.深圳云之家网络有限公司2016年年度优秀员工 
+4.深圳云之家网络有限公司2015届部门优秀纯金
+附:
+github地址：https://github.com/gdutkyle
 简书地址：https://www.jianshu.com/u/25d79c70dcf5
+
