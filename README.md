@@ -4,7 +4,7 @@
 姓名： 吴浩&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;性别：&nbsp;&nbsp;男
 手机：18826408875  &nbsp; &nbsp;邮箱：992488670@qq.com
 英语等级:四级 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;工作年限：4年
-应聘岗位：Android开发工程师
+应聘岗位：Android应用开发岗
 ## 工作技能
 1 熟练掌握 java 开发技术,具有较好的 java 基础，熟悉JVM 的内存回收机制，熟悉java8 HashMap源码等。
 2 熟练掌握Android开发技术，对于基础的Android Framework 源码有一定的了解，包括但不限于Zygote、binder 机制、Activity 启动流程、View 绘制流程、LocalBroadCastManager等
@@ -18,7 +18,7 @@
 
 ## 工作经验
 **公司名称**&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;**阿里巴巴-Lazada** &nbsp;&nbsp;&nbsp;&nbsp;
-**工作时间**&nbsp; &nbsp;2018/09 至今	&nbsp; &nbsp;&nbsp; &nbsp;**职位**	 &nbsp; &nbsp;高级无线开发工程
+**工作时间**&nbsp; &nbsp;2018/09 至今	&nbsp; &nbsp;&nbsp; &nbsp;**职位**	 &nbsp; &nbsp;高级无线开发工程师
 **工作内容**
 1 Lazada、AliExpress（速卖通）、Daraz 等海外电商的IM 需求开发和维护
 2 负责各海外电商MessageBox的需求开发和维护 
@@ -40,16 +40,22 @@
 
 **时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018-9月至今
 **项目简介**
-现所在的Bu负责阿里海外电商的国际化业务，业务方包括AliExpress、Lazada、Daraz、台湾淘宝等阿里的战略出海业务
+1 端上IMSDK 架构升级专项
+2 MessageBox（消息盒子）从0-1项目
+3 日志平台建立和全链路异常监控平台建立
 **我的职责**
-主要负责业务模块：
-1 IM模块
-2 Message（消息盒子）从0-1，单项业务日活千万
+1 IMSDK升级专项：
+（1）消息同步优化（sync 、rebase、querySessionList流程、智能心跳补偿逻辑）保证三端消息的一致性
+（2）消息到达率提升包括：保活机制、第三方push接入
+（3）帧率优化和性能优化
+2 MessageBox 从0到1设计和开发。参与架构设计，实现开发等
+3 推动移动端日志平台和监控平台建立。基于
+
 
 ------
 
 
-### 项目名称&nbsp;&nbsp;&nbsp;&nbsp; 金蝶 云之家（百万日活）
+### 项目名称&nbsp;&nbsp;&nbsp;&nbsp; 金蝶 云之家APP（百万日活）
 
 **时间**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015-7月2018-9月
 **项目简介**
@@ -61,10 +67,10 @@
 进行各个迭代周期的开发任务，跟进线上反馈的问题，并协助各个业务线，解决相关的技术问题和相关方案的设定  
 
 ## 荣誉和奖励
-1 2018年阿里财年年度绩效3.75
-2.深圳云之家网络有限公司2017年精英人才
-3.深圳云之家网络有限公司2016年年度优秀员工 
-4.深圳云之家网络有限公司2015届部门优秀纯金
+1 2018年阿里财年年度绩效3.75（Top2）
+2 2019年阿里财年上半年绩效3.5+（top3）
+3.深圳云之家网络有限公司2017年精英人才
+4.深圳云之家网络有限公司2016年年度优秀员工 
 附:
 github地址：https://github.com/gdutkyle
 简书地址：https://www.jianshu.com/u/25d79c70dcf5
